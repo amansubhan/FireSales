@@ -1,118 +1,157 @@
 ﻿using System;
+using System.Data.SQLite;
 using System.Data;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using Finisar.SQLite;
+using System.ComponentModel;
+using System.IO;
+using System.Diagnostics;
 
 namespace FireSales
 {
-    class DBUtil
+    class dbUtil
     {
-        static SQLiteConnection sqlite_conn;
-        static SQLiteCommand sqlite_cmd;
-        static SQLiteDataReader sqlite_datareader;
+        private BackgroundWorker bw;
+        const string filename = @"1database.db";
+        SQLiteConnection conn = new SQLiteConnection("Data Source=" + filename + ";Version=3;");
+        DataSet ds = new DataSet();
+        string sql = null;
+        int progress = 0;
 
-        public DBUtil()
+        public dbUtil()
         {
-
+            this.bw = new BackgroundWorker();
+            this.bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+            this.bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+            this.bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            this.bw.WorkerReportsProgress = true;
         }
 
-        ~DBUtil()
+        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            sqlite_conn.Close();
+            //this.label1.Text = "The answer is: " + e.Result.ToString();
+            //this.btn_Done.Enabled = true;
         }
 
-        private void setConnection()
+        private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            sqlite_conn = new SQLiteConnection("Data Source=1database.db;Version=3");
-            sqlite_conn.Open();
+            //window.setProgress(e.ProgressPercentage);
+            //MainWindow.setProgresstext(e.ProgressPercentage.ToString());
+            //string status = e.ProgressPercentage.ToString();
+            //MainWindow.ProgressPercentage = e.ProgressPercentage.ToString();
+            //Debug.WriteLine(e.ProgressPercentage.ToString());
+            //this.btn_Done.Text = e.ProgressPercentage.ToString();
         }
 
-        public void executeDML()
+        private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            setConnection();
-            // create a new SQL command:
-            sqlite_cmd = sqlite_conn.CreateCommand();
+            BackgroundWorker worker = (BackgroundWorker)sender;
 
-            sqlite_cmd.CommandText = "INSERT INTO test (id, text) VALUES (3, 'Test Text 3');";
-
-            // And execute this again ;D
-            sqlite_cmd.ExecuteNonQuery();
-
-            // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
-        }
-
-        public void executeDQL()
-        {
-            setConnection();
-            sqlite_cmd = sqlite_conn.CreateCommand();
-            sqlite_cmd.CommandText = "SELECT * FROM test";
-
-            // Now the SQLiteCommand object can give us a DataReader-Object:
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
-
-            // The SQLiteDataReader allows us to run through the result lines:
-            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            /*for (int i = 0; i < 100; ++i)
             {
-                // Print out the content of the text field:
-                //System.Console.WriteLine(sqlite_datareader["text"]);
-                String output = sqlite_datareader.GetString(0);
-                MessageBox.Show("Reply from database: " + output);
-            }
+                // report your progres
+                worker.ReportProgress(i);
 
-            // We are ready, now lets cleanup and close our connection:
-            sqlite_conn.Close();
+                // pretend like this a really complex calculation going on eating up CPU time
+                System.Threading.Thread.Sleep(100);
+            }
+            e.Result = "42";*/
+            conn.Close();
+            progress = 10;
+            conn.Open();
+            worker.ReportProgress(10);
+            var da = new SQLiteDataAdapter(sql, conn);
+            da.Fill(ds);
+            conn.Close();
+            sql = null;
+            worker.ReportProgress(100);
+            progress = 100;
+
         }
 
-        public DataTable exectueUOMList()
+
+
+        public DataView Select()
         {
-            setConnection();
-            sqlite_cmd = sqlite_conn.CreateCommand();
-            sqlite_cmd.CommandText = "SELECT id, type FROM uom";
-
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
-
-            DataSet ds = new DataSet();
-            DataTable t = ds.Tables.Add("UOM");
-            t.Columns.Add("id", typeof(int));
-            t.Columns.Add("type", typeof(string));
-            DataRow row = null;
-
-            while (sqlite_datareader.Read())
+            try
+            {
+                if (!this.bw.IsBusy)
                 {
-                int id = sqlite_datareader.GetInt32(0);
-                string type = sqlite_datareader.GetString(1);
-                row = t.NewRow();
-                row["id"] = id;
-                row["type"] = type;
-                t.Rows.Add(row);
+                    this.bw.RunWorkerAsync();
+                    //this.btn_Done.Enabled = false;
                 }
-            return t;
+                while (progress <= 100)
+                {
+
+                    if (progress == 100)
+                    {
+                        Debug.WriteLine(progress.ToString());
+                        return ds.Tables[0].DefaultView;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            conn.Close();
+            return null;
         }
 
-        /*public List<ProductsClass> getAllProducts()
+        public int Update(string sql)
         {
-            setConnection();
-
-            sqlite_cmd = sqlite_conn.CreateCommand();
-            sqlite_cmd.CommandText = "SELECT * FROM products";
-
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
-            List<ProductsClass> prod = new List<ProductsClass>();
-
-            while (sqlite_datareader.Read())
+            conn.Open();
+            int status = 0;
+            using (SQLiteCommand qry = new SQLiteCommand(conn))
             {
-                prod.Add(new ProductsClass(sqlite_datareader.GetInt32(0), 
-                    sqlite_datareader.GetString(1), 
-                    sqlite_datareader.GetString(2), 
-                    sqlite_datareader.GetInt32(3), 
-                    sqlite_datareader.GetInt32(4), 
-                    sqlite_datareader.GetBoolean(5)));
+                qry.CommandText = sql;
+                status = qry.ExecuteNonQuery();
             }
+            conn.Close();
+            return status;
+        }
 
-            return prod;
-        }*/
+        public int Insert(string sql)
+        {
+            conn.Open();
+            int status = 0;
+            using (SQLiteCommand qry = new SQLiteCommand(conn))
+            {
+                qry.CommandText = sql;
+                status = qry.ExecuteNonQuery();
+            }
+            conn.Close();
+            return status;
+        }
+
+        public int Delete(string sql)
+        {
+            conn.Open();
+            int status = 0;
+            using (SQLiteCommand qry = new SQLiteCommand(conn))
+            {
+                qry.CommandText = sql;
+                status = qry.ExecuteNonQuery();
+            }
+            conn.Close();
+            return status;
+        }
+
+        public DataView GetAllProducts()
+        {
+            sql = "select * from products;";
+            return Select();
+        }
+
+        public int deleteUom(int id)
+        {
+            sql = "delete from uom where id = " + id + ";";
+            return Delete(sql);
+        }
+
+        public DataView getAllUom()
+        {
+            sql = "select * from uom;";
+            return Select();
+        }
     }
-
 }

@@ -70,8 +70,8 @@
     <Compile Include="AddProduct.Designer.cs">
       <DependentUpon>AddProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="dbUtil.cs" />
     <Compile Include="dbComp.cs" />
-    <Compile Include="DBUtil.cs" />
     <Compile Include="SetUOM.cs">
       <SubType>Form</SubType>
     </Compile>

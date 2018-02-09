@@ -43,7 +43,7 @@ namespace FireSales
         {
             this.Refresh();
             System.Threading.Thread.Sleep(100);
-            dbComp db = new dbComp();
+            dbUtil db = new dbUtil();
             dataGridView1.DataSource = db.GetAllProducts();
         }
     }

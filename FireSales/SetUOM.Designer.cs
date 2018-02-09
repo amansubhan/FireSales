@@ -36,7 +36,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +74,6 @@
             this.flowLayoutPanel1.Controls.Add(this.button5);
             this.flowLayoutPanel1.Controls.Add(this.splitter2);
             this.flowLayoutPanel1.Controls.Add(this.splitter1);
-            this.flowLayoutPanel1.Controls.Add(this.richTextBox1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -138,7 +136,7 @@
             // 
             this.splitter2.Location = new System.Drawing.Point(213, 3);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 65);
+            this.splitter2.Size = new System.Drawing.Size(3, 64);
             this.splitter2.TabIndex = 7;
             this.splitter2.TabStop = false;
             // 
@@ -148,17 +146,9 @@
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter1.Location = new System.Drawing.Point(222, 3);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 65);
+            this.splitter1.Size = new System.Drawing.Size(3, 64);
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(231, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(261, 65);
-            this.richTextBox1.TabIndex = 8;
-            this.richTextBox1.Text = "";
             // 
             // SetUOM
             // 
@@ -190,6 +180,5 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Splitter splitter1;
-        public System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

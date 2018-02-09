@@ -5,7 +5,7 @@ namespace FireSales
 {
     public partial class SetUOM : Form
     {
-        dbComp db = new dbComp();
+        dbUtil db = new dbUtil();
         
 
         public SetUOM()
@@ -73,7 +73,7 @@ namespace FireSales
                 {
                     MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                MessageBox.Show(stat.ToString() + " Record deleted1");
+                MessageBox.Show(stat.ToString() + " Record deleted");
                 db.getAllUom();
             }
 
