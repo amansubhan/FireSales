@@ -4,6 +4,7 @@ using System.Data;
 using System.ComponentModel;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace FireSales
 {
@@ -67,9 +68,7 @@ namespace FireSales
 
         }
 
-
-
-        public DataView Select()
+        public DataView Select(string sql)
         {
             try
             {
@@ -139,7 +138,7 @@ namespace FireSales
         public DataView GetAllProducts()
         {
             sql = "select * from products;";
-            return Select();
+            return Select(sql);
         }
 
         public int deleteUom(int id)
@@ -151,7 +150,29 @@ namespace FireSales
         public DataView getAllUom()
         {
             sql = "select * from uom;";
-            return Select();
+            return Select(sql);
+        }
+
+        public AutoCompleteStringCollection getProdNames()
+        {
+            string qry = "select name from products;";
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(qry, conn);
+            SQLiteDataReader reader = cmd.ExecuteReader();
+            AutoCompleteStringCollection MyCollection = new AutoCompleteStringCollection();
+            while (reader.Read())
+            {
+                MyCollection.Add(reader.GetString(0));
+            }
+            conn.Close();
+            return MyCollection;
+        }
+
+        public DataView getProdDetails(string pname)
+        {
+            DataView pd = new DataView();
+            pd = Select("select descr, price from products where name = " + pname + ";");
+            return pd;
         }
     }
 }

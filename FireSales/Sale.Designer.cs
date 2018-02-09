@@ -548,6 +548,7 @@
             // 
             this.textBox6.Location = new System.Drawing.Point(266, 92);
             this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(100, 24);
             this.textBox6.TabIndex = 8;
             // 
@@ -565,6 +566,7 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(270, 29);
             this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(100, 24);
             this.textBox5.TabIndex = 6;
             // 
@@ -582,6 +584,7 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(90, 89);
             this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(100, 24);
             this.textBox4.TabIndex = 4;
             // 
@@ -599,6 +602,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(90, 59);
             this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(280, 24);
             this.textBox3.TabIndex = 2;
             // 
@@ -614,10 +618,13 @@
             // 
             // textBox2
             // 
+            this.textBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.textBox2.Location = new System.Drawing.Point(90, 29);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 24);
             this.textBox2.TabIndex = 0;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // tableLayoutPanel5
             // 
