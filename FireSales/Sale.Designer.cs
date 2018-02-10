@@ -37,6 +37,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_qry = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,16 +48,15 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button_qry = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -144,12 +144,12 @@
             this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(873, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(874, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.18047F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.81953F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(388, 942);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(387, 942);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // groupBox1
@@ -170,11 +170,22 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(382, 136);
+            this.groupBox1.Size = new System.Drawing.Size(381, 137);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Detail";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button_qry
+            // 
+            this.button_qry.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_qry.Location = new System.Drawing.Point(386, 116);
+            this.button_qry.Name = "button_qry";
+            this.button_qry.Size = new System.Drawing.Size(10, 10);
+            this.button_qry.TabIndex = 10;
+            this.button_qry.Text = "button21";
+            this.button_qry.UseVisualStyleBackColor = true;
+            this.button_qry.Click += new System.EventHandler(this.button_qry_Click);
             // 
             // label6
             // 
@@ -269,6 +280,14 @@
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(3, 146);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(381, 62);
+            this.textBox1.TabIndex = 2;
+            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -283,7 +302,7 @@
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.32909F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.670913F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(864, 942);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(865, 942);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
             // label1
@@ -294,7 +313,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 897);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(858, 45);
+            this.label1.Size = new System.Drawing.Size(859, 45);
             this.label1.TabIndex = 0;
             this.label1.Text = "Total:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -314,27 +333,8 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(858, 891);
+            this.dataGridView1.Size = new System.Drawing.Size(859, 891);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // button_qry
-            // 
-            this.button_qry.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_qry.Location = new System.Drawing.Point(386, 116);
-            this.button_qry.Name = "button_qry";
-            this.button_qry.Size = new System.Drawing.Size(10, 10);
-            this.button_qry.TabIndex = 10;
-            this.button_qry.Text = "button21";
-            this.button_qry.UseVisualStyleBackColor = true;
-            this.button_qry.Click += new System.EventHandler(this.button_qry_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(3, 145);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(382, 62);
-            this.textBox1.TabIndex = 2;
             // 
             // Column5
             // 
@@ -362,7 +362,6 @@
             this.Column4.HeaderText = "isTaxed";
             this.Column4.Name = "Column4";
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Sale
             // 
@@ -423,6 +422,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }

@@ -15,6 +15,8 @@ namespace FireSales
     {
         dbUtil db = new dbUtil();
         string pid, pname, descr, price, uom, istaxed = null;
+        DataTable pd = new DataTable();
+
 
         public Sale()
         {
@@ -38,6 +40,12 @@ namespace FireSales
             textBox2.AutoCompleteCustomSource = db.getProdNames();
             this.ActiveControl = textBox2;
             this.AcceptButton = button_qry;
+
+            pd.Columns.Add("name", typeof(String));
+            pd.Columns.Add("descr", typeof(String));
+            pd.Columns.Add("price", typeof(String));
+            pd.Columns.Add("type", typeof(String));
+            pd.Columns.Add("istaxed", typeof(Boolean));
         }
 
         private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
@@ -114,35 +122,40 @@ namespace FireSales
             }
             else
             {*/
-            DataTable pd = db.getProdByID(Convert.ToInt32(textBox1.Text));
-            Debug.WriteLine("ByCode: " + pd.Rows.Count);
-            if (pd.Rows.Count == 1)
+            if (!string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                foreach (DataRow row in pd.Rows)
-                {
-                    pname = row["name"].ToString();
-                    descr = row["descr"].ToString();
-                    price = row["price"].ToString();
-                    uom = row["type"].ToString();
-                    istaxed = row["istaxed"].ToString();
-                }
+                
+                pd.Rows.Add(db.getProdByID(Convert.ToInt32(textBox1.Text)));
 
-                textBox1.Text = null;
-                textBox2.Text = pname;
-                textBox3.Text = descr;
-                textBox4.Text = uom;
-                textBox5.Text = price;
-                textBox6.Text = istaxed;
-                addItemtoGrid();
-                pd.EndInit();
-                Debug.WriteLine("ByCode after clear: " + pd.Rows.Count);
-            }
-            else
-            {
-                MessageBox.Show("Product ID not found.");
+                Debug.WriteLine("ByCode: " + pd.Rows.Count);
+
+                if (pd.Rows.Count == 1)
+                {
+                    foreach (DataRow row in db.getProdByID(Convert.ToInt32(textBox1.Text)).Select())
+                    {
+                        pname = row["name"].ToString();
+                        descr = row["descr"].ToString();
+                        price = row["price"].ToString();
+                        uom = row["type"].ToString();
+                        istaxed = row["istaxed"].ToString();
+                    }
+
+                    textBox1.Text = null;
+                    textBox2.Text = pname;
+                    textBox3.Text = descr;
+                    textBox4.Text = uom;
+                    textBox5.Text = price;
+                    textBox6.Text = istaxed;
+                    addItemtoGrid();
+                    pd.Clear();
+                    Debug.WriteLine("ByCode after clear: " + pd.Rows.Count);
+                }
+                else
+                {
+                    MessageBox.Show("Product ID not found.");
+                }
             }
         }
-        //}
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
