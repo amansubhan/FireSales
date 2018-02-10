@@ -21,7 +21,7 @@ namespace FireSales
             Sale sale = new Sale();
             if (isSalesWinOpen == false)
             {
-                sale.MdiParent = this;
+                //sale.MdiParent = this;
                 isSalesWinOpen = true;
                 sale.Show();
             }
