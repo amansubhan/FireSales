@@ -50,11 +50,13 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_qry = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -304,29 +306,16 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ItemName,
+            this.Column5,
+            this.Column3,
+            this.Column2,
             this.Column1,
-            this.Column2});
+            this.Column4});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(858, 891);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // ItemName
-            // 
-            this.ItemName.HeaderText = "ItemName";
-            this.ItemName.Name = "ItemName";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "ItemQty";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "ItemPrice";
-            this.Column2.Name = "Column2";
             // 
             // button_qry
             // 
@@ -346,6 +335,34 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(382, 62);
             this.textBox1.TabIndex = 2;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Name";
+            this.Column5.Name = "Column5";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Description";
+            this.Column3.Name = "Column3";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Price";
+            this.Column2.Name = "Column2";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "UOM";
+            this.Column1.Name = "Column1";
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "isTaxed";
+            this.Column4.Name = "Column4";
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Sale
             // 
@@ -400,10 +417,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.Button button_qry;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
     }
 }

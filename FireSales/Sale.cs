@@ -86,27 +86,38 @@ namespace FireSales
 
         private void button_qry_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            /*if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
                 DataTable pd = db.getProdDetail(textBox2.Text);
-                foreach (DataRow row in pd.Rows)
+                Debug.WriteLine("ByName: " + pd.Rows.Count);
+                if (pd.Rows.Count == 1)
                 {
-                    pid = row["id"].ToString();
-                    descr = row["descr"].ToString();
-                    price = row["price"].ToString();
-                    uom = row["type"].ToString();
-                    istaxed = row["istaxed"].ToString();
-                }
+                    foreach (DataRow row in pd.Rows)
+                    {
+                        pid = row["id"].ToString();
+                        descr = row["descr"].ToString();
+                        price = row["price"].ToString();
+                        uom = row["type"].ToString();
+                        istaxed = row["istaxed"].ToString();
+                    }
 
-                textBox1.Text = pid;
-                textBox3.Text = descr;
-                textBox4.Text = uom;
-                textBox5.Text = price;
-                textBox6.Text = istaxed;
+                    textBox1.Text = pid;
+                    textBox3.Text = descr;
+                    textBox4.Text = uom;
+                    textBox5.Text = price;
+                    textBox6.Text = istaxed;
+                }
+                else
+                {
+                    MessageBox.Show("Product ID not found.");
+                }
             }
             else
+            {*/
+            DataTable pd = db.getProdByID(Convert.ToInt32(textBox1.Text));
+            Debug.WriteLine("ByCode: " + pd.Rows.Count);
+            if (pd.Rows.Count == 1)
             {
-                DataTable pd = db.getProdByID(Convert.ToInt32(textBox1.Text));
                 foreach (DataRow row in pd.Rows)
                 {
                     pname = row["name"].ToString();
@@ -122,12 +133,37 @@ namespace FireSales
                 textBox4.Text = uom;
                 textBox5.Text = price;
                 textBox6.Text = istaxed;
+                addItemtoGrid();
+                pd.EndInit();
+                Debug.WriteLine("ByCode after clear: " + pd.Rows.Count);
+            }
+            else
+            {
+                MessageBox.Show("Product ID not found.");
             }
         }
+        //}
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void addItemtoGrid()
+        {
+            dataGridView1.Rows.Add(pname, descr, price, uom, istaxed);
+            pid = String.Empty;
+            pname = String.Empty;
+            descr = String.Empty;
+            price = String.Empty;
+            uom = String.Empty;
+            istaxed = String.Empty;
+            /*textBox1.Text = null;
+            textBox2.Text = null;
+            textBox3.Text = null;
+            textBox4.Text = null;
+            textBox5.Text = null;
+            textBox6.Text = null;*/
         }
     }
 }
